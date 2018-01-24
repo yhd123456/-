@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#div1{
+    width:100px;
+    height: 100px;
+    background: skyblue;
+    position: absolute;
+    top:0;
+    left:0;
+}
+#div2{
+    width:100px;
+    height: 100px;
+    background: red;
+    position: absolute;
+    top:200px;
+    left:550px;
+}
+#div2.green{
+    background: greenyellow;
+}
+</style>
+</head>
+<body>
+    <div id="div1"></div>
+    <div id="div2"></div>
+<script>
+    const div1 =  document.getElementById('div1');
+    const div2 =  document.getElementById('div2');
+	
+	div1.onmousedown=function(ev){		
+		let X=ev.pageX-div1.offsetLeft;
+		let Y=ev.pageY-div1.offsetTop;				
+		document.onmousemove=function(e){	
+			let div1L = e.pageX - X;
+			let div1T = e.pageY - Y;
+			let div1R = div1L + div1.offsetWidth;
+			let div1B = div1T + div1.offsetHeight;			
+			//offsetHeight	是对象的可高度，包滚动条等边线，会随窗口的显示大小改变
+			let div2T = div2.offsetTop;
+			let div2L = div2.offsetLeft;
+			let div2B = div2.offsetHeight+div2T;
+			let div2R = div2.offsetWidth+div2L;
+			console.log(div1L)
+			console.log(div2R+'div2')
+			if(div1L > div2R || div1B < div2T || div1R < div2L || div1T > div2B){								
+				div2.style.background='red';				
+			}else{
+				console.log('碰到啦')
+				div2.style.background='#000';
+			}			
+			div1.style.left = div1L+'px';
+			div1.style.top = div1T+'px';				
+		}		
+		document.onmouseup=function(){			
+			document.onmousemove=document.onmouseup=null			
+		}
+	}
+	
+
+</script>
+</body>
+</html>
