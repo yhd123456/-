@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#k{
+    width:0;
+    height: 0;
+    border: 1px solid skyblue;
+    position: absolute;
+    left:0;
+    top:0;
+    background:rgba(180, 186, 211,1);
+}
+</style>
+</head>
+<body id="body">
+    <!-- <div id="k"></div> -->
+<script>
+    const body = document.getElementById('body');
+    document.onmousedown = function(ev){
+        let disX = ev.pageX;
+        let disY = ev.pageY;
+        let div = document.createElement('div');
+        div.id = 'k';
+        body.appendChild(div);
+
+        document.onmousemove = function(ev){
+        	
+//用移动的位置减点击时的位置是因为移动的初始位置的值就是点击时的位置，所以得减去初始值，这样才能鼠标拉多大框有多大
+            let w = Math.abs(ev.pageX - disX);
+            let h = Math.abs(ev.pageY - disY);
+
+            div.style.width = w + 'px';
+            div.style.height = h + 'px';
+
+
+	//下面这样是为啦，从哪点击从哪开始拉,取最小值是因为，往页面右边拉的时候一定是divX小也就是用点击位置的left，top值
+	//往页面左边拉的时候一定是ev。pageX的值小，也就是用移动位置的left，top值。
+	//为什么要用移动的ev。pageX值：div的长度，高度增加都是从左往右，从上往下的，left值变换啦，就造成一个从右往左
+	//拉的假象；
+            let l = Math.min(disX,ev.pageX);
+            let t = Math.min(disY,ev.pageY);
+
+            console.log('移动的:'+(ev.pageX) , '按下的:'+disX)
+
+
+            div.style.left = l + 'px';
+            div.style.top = t + 'px';
+        }
+        document.onmouseup = function(){
+            document.onmousemove = document.onmouseup = null;
+            div.remove();
+        }
+    }
+</script>
+</body>
+</html>
