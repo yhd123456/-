@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+}
+#ul{
+    list-style: none;
+    width: 450px;
+    border: 1px solid #000;
+    overflow: hidden;
+}
+li{
+    width:200px;
+    height: 200px;
+    float: left;
+    margin: 10px;
+    opacity: 0;
+    transition: 1s;
+}
+img{
+    width:200px;
+    height: 200px;
+}
+
+
+</style>
+</head>
+<body>
+    <ul id="ul">
+        <!-- <li><img src="img/0.jpg"></li>
+        <li><img src="img/0.jpg"></li>
+        <li><img src="img/0.jpg"></li>
+        <li><img src="img/0.jpg"></li> -->
+    </ul>
+<script>    
+    const ul = document.getElementById('ul');
+    /*
+      在批量渲染页面的时候尽量用字符串拼接。
+    */
+    let str = ''; 
+    for(let i=0;i<40;i++){
+        str += `<li _src="img/${i%10}.jpg"><img></li>`;
+    }
+    ul.innerHTML = str;
+
+    const lis = Array.from(document.getElementsByTagName('li'));
+    const iH = window.innerHeight;//不计算滚动条可视区的高度，
+    render();//点击页面调用一次函数，进页面默认有数据
+    window.onscroll = function(){
+        render();
+    }
+
+    function render(){
+        lis.forEach(e=>{
+        	
+        		//获取当前li位置到顶部的距离	是否小于屏幕的距离        并且 li有src行间属性				
+            if(e.getBoundingClientRect().top <= iH && e.getAttribute('_src')){
+                let data = e.getAttribute('_src');//图片地址
+                e.children[0].src = data;//把写在li行间的路径，给img做图片的路径，
+                e.removeAttribute('_src');//再把li上面的路径删除，
+                setTimeout(function(){
+                    e.style.opacity = 1;
+                },100);
+            }
+        });
+    }
+
+</script>
+</body>
+</html>
