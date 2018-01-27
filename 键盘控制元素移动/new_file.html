@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+<style>
+	#box{
+   	 	width:100px;
+    	height: 100px;
+    	position: absolute;
+    	/*left:0;
+    	top:0;*/
+    	background:red;
+    	top: 0;
+    	left: 0;
+    	
+	}
+</style>
+</head>
+<body>
+    <div id="box"></div>
+<script>
+    let box = document.getElementById('box');
+    let timer=null
+	let obj={
+		37:false,
+		38:false,
+		39:false,
+		40:false	
+	}
+
+    document.onkeydown = function(ev){        
+      obj[ev.keyCode]=true;
+      fn();
+	}
+    document.onkeyup=function(ev){    	
+    	obj[ev.keyCode]=false;    	
+    }
+    
+    function fn(){ 
+    
+    clearInterval(timer);
+    
+    	timer=setInterval(function(){
+	
+    		if(obj[39]==true){    			
+      box.style.left = box.offsetLeft + 5 +'px';
+            }
+    	if(obj[40]==true){    			
+      box.style.top = box.offsetTop + 5 +'px';
+            }
+    	if(obj[37]==true){    			
+      box.style.left = box.offsetLeft - 5 +'px';
+            }
+    	if(obj[38]==true){    			
+      box.style.top = box.offsetTop - 5 +'px';
+          }	
+
+    	},10)
+    	
+    }
+    
+		
+	</script>
+	<body>
+	</body>
+</html>
