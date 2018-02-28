@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			var str = 'user=zhangsan&pass=123';
+			
+			console.log(queryString(str))
+			
+			function queryString(str){
+        		let obj = {};
+        		let arr = str.split('?')[1].split('&');
+        		arr.forEach(e=>{
+            	let a = e.split('=');
+            	obj[a[0]] = a[1];
+        	});
+        return obj;
+    }
+			
+		</script>
+	</body>
+</html>
