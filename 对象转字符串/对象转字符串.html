@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+	//先把对象转成数组，再把数组转成字符串
+    let obj = {
+        name:'zhangsan',
+        pass:123
+    }
+
+    let arr = [];
+
+    for(let attr in obj){
+          arr.push(attr+'='+obj[attr]);
+    }   
+    //for in  中的attr 是key 值，  所以obj[attr] 就是value值
+    console.log(arr.join('&'));//使用把数组转成字符串
+
+//  console.log(arr.join('&'));
+
+</script>
+	</body>
+</html>
