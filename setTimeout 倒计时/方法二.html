@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script>
+		//看起来比方法一高大上一些
+		let num = 10;
+		
+		function T(){
+           setTimeout(function(){
+               if(num <= 1)return;
+               num --;
+               console.log(num);
+               T();
+           },1000)
+       }
+       T();
+	</script>
+</html>
